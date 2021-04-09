@@ -2,7 +2,7 @@ import requests
 import json
 def getdata():
     
-    url = 'http://ipwhois.app/json/106.195.5.27'
+    url = 'http://ipinfo.io/json'
     response = requests.request("GET",url)
     data = json.loads(response.text)
     dic={}
@@ -11,8 +11,9 @@ def getdata():
     dic['city'] = data['city']
     dic['country'] = data['country']
     dic['region'] = data['region']
-    dic['lat'] = data['latitude']
-    dic['lon'] = data['longitude']
+    loc = list(float(x) for x in data['loc'].split(','))
+    dic['lat'] = loc[0]
+    dic['lon'] = loc[1]
 
     return dic
     
